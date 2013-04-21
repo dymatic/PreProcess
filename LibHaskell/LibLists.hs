@@ -16,6 +16,15 @@ module LibHaskell.LibLists(
  ,sew
  ,append
  ,appendList
+ ,spay
+ ,dropAfter
+ ,between
+ ,removeBetween
+ ,removeAllBetween
+ ,bombard
+ ,rm
+ ,rmAll
+ ,remBetwix
 ) where
 
 -- For general lists not biased to a type.
@@ -44,6 +53,10 @@ delete [] _ = []
 delete a@(x:xs) y
 	| y == take (length y) a = delete (strt a (length y)) y
 	| otherwise = x : delete xs y
+
+delList :: (Eq a) => [a] -> [[a]] -> [a]
+delList a [] = a
+delList xs (y:ys) = delList ( delete xs y) ys
 
 delFirst :: (Eq a) => [a] -> [a] -> [a]
 delFirst a@(x:xs) ys
@@ -97,3 +110,75 @@ append (x:xs) b = x : append xs b
 appendList :: [a] -> [a] -> [a]
 appendList [] b = b++[]
 appendList (x:xs) b = x : appendList xs b
+
+spay :: [a] -> [a]
+spay [] = []
+spay a@(x:xs)
+  | (length a) == 2 = x:[]
+  | otherwise = x : spay xs
+  
+dropAfter :: (Eq a) => [a] -> a -> [a]
+dropAfter [] _ = []
+dropAfter (x:xs) b
+  | (x == b) = x:[]
+  | otherwise = x : dropAfter xs b
+
+between :: (Eq a) =>  [a] -> (a,a) -> [a]
+between [] _ = []
+between xs (a,b) = spay $ dropAfter (after xs a) b
+
+removeBetween ::(Eq a) =>  [a] -> (a,a) -> [a]
+removeBetween xs (a,b) = delete xs $ between xs (a,b)
+
+removeAllBetween :: (Eq a) => [a] -> (a,a) -> [a]
+removeAllBetween xs (a,b)
+  | and [(a `elem` xs),(b `elem` xs)] = removeAllBetween (removeBetween xs (a,b)) (a,b)
+  | otherwise = xs
+  
+bombard :: [([a] -> [a])] -> [a] -> [a]
+bombard [] ys = ys
+bombard (x:xs) ys = x (bombard xs ys)
+
+-- Delete for single elements
+rm :: (Eq a) => [a] -> a -> [a]
+rm [] _ = []
+rm (x:xs) b
+  | (x == b) = rm xs b
+  | otherwise = x : rm xs b
+
+rmAll :: (Eq a) => [a] -> [a] -> [a]
+rmAll a [] = a
+rmAll xs (b:bs) = rmAll (rm xs b) bs
+
+--The following function is like removeBetween, but it also removes (a,b)
+remBetwix :: (Eq a) => [a] -> (a,a) -> [a]
+remBetwix xs (a,b) =  rmAll (removeBetween xs (a,b)) [a,b] 
+
+--Deletes every occurance
+remAllBetwix :: (Eq a) => [a] -> (a,a) -> [a]
+remAllBetwix xs (a,b)
+  | and [(a `elem` xs),(b `elem` xs)] = remAllBetwix (remBetwix xs (a,b)) (a,b)
+  | otherwise = xs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

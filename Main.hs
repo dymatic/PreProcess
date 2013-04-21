@@ -9,4 +9,4 @@ main = do
 	langdefines <- openFile "/etc/PreProcess/langdefines" ReadMode
 	langDefinesText <- hGetContents langdefines
 	codeText <- hGetContents code
-	let translatedFile = (replList (lines codeText) (makeAllParameters (lines langDefinesText))) in writeFile c $ unwords $ map ((flip appendList) "\n") translatedFile 
+	let translatedFile = (replList (lines codeText) (makeAllParameters (sanitize (lines langDefinesText)))) in writeFile c $ unwords $ map ((flip appendList) "\n") translatedFile 
