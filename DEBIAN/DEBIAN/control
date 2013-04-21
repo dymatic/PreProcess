@@ -1,0 +1,9 @@
+Package: preprocess
+Version: 1.5.1
+Architecture: amd64
+Maintainer: Norton "dymatic" Jenkins <dominantshoe@gmail.com>
+Installed-Size: 1400
+Depends: ghc
+Section: programming
+Priority: optional
+Description: Create your own language in 20 seconds flat. Write sanitization checks for commonly mispelled words. Make text manipulation your pet.

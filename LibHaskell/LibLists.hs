@@ -9,6 +9,7 @@ module LibHaskell.LibLists(
  ,occurences
  ,inFst
  ,look
+ ,one
  ,filterBreak
  ,after
  ,coltil
@@ -25,6 +26,7 @@ module LibHaskell.LibLists(
  ,rm
  ,rmAll
  ,remBetwix
+ ,remAllBetwix
 ) where
 
 -- For general lists not biased to a type.
@@ -75,10 +77,10 @@ inFst a xs = a `elem` (map fst xs)
 
 --Associative Tupple Lookup
 look :: (Eq a) => a -> [(a,a)] -> a
-look a all@((b,c):xs)
-	| not $ a `inFst` all = a
-	| a == b = c
-	| otherwise = look a xs
+look t xs = snd $ one (filter (\(a,b) -> a == t) xs) 
+
+one :: [a] -> a
+one (x:xs) = x
 
 filterBreak :: (a -> Bool) -> [a] -> [a]
 filterBreak _ [] = []

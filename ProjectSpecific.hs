@@ -23,5 +23,5 @@ sanitize :: [String] -> [String]
 sanitize [] = []
 sanitize (x:xs)
   | '@' `elem` x = (rm x '@') : sanitize xs
-  | and [((occurences x '$') `mod` 2 == 0),((occurences x '$') > 1)] = remBetwix x ('$','$') : sanitize xs
+  | and [((occurences x '$') `mod` 2 == 0),((occurences x '$') > 1)] = remAllBetwix x ('$','$') : sanitize xs
   | otherwise = x : sanitize xs
