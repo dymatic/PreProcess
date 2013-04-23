@@ -27,6 +27,7 @@ module LibHaskell.LibLists(
  ,rmAll
  ,remBetwix
  ,remAllBetwix
+ ,mostly
 ) where
 
 -- For general lists not biased to a type.
@@ -162,7 +163,9 @@ remAllBetwix xs (a,b)
   | and [(a `elem` xs),(b `elem` xs)] = remAllBetwix (remBetwix xs (a,b)) (a,b)
   | otherwise = xs
 
-
+mostly :: (Eq a) => [a] -> a -> Bool
+mostly xs n = ncur > (length xs) - ncur
+  where ncur = occurences xs n
 
 
 
