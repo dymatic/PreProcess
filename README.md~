@@ -4,7 +4,7 @@ Welcome to the page for the humble SCT rewrite, implemented in Haskell. Original
 
 Limitations over SCT
 ====================
-Language titles are not present, and I have decided that they will not be present.
+Language titles are not present, and I have decided that they will not be present. Currently your langdefines file will be installed to /etc/Preprocess/langdefines, but in a few versions (one major version) that will be changeable.
 
 Advantages over SCT
 ===================
@@ -17,13 +17,14 @@ in the old SCT. Old SCT files can still be read, but this provides a MUCH shorte
 
 Features That will be implemented
 =================================
+	-Variant Configuation Files
 	-Better Command-line option handling with a --overwrite flag.
 
 The Future
 ===========
-I am new to Haskell yet and will eventually rewrite a good portion of the code making up this program (probably using my own data structures, since that was one area I was lacking in at the time of writing).
+Another plan I have is to implement changes from this repo into the SCT repo by calling Haskell functions from its C++ code, or just through a vanilla rewrite (or even through Guile Lisp). Users of the old SCT (I may be the only one, but if you use it, listen up) can "return home" after this project is EOL so that they won't need the massive Haskell libs.
 
-There is also a boot system in-development
+I am also just learning Haskell, so I am going to go back and try to replace some of the guard functions with map cause for efficiency, and use Classes and what-not. This is my Haskell poster-child project, after all.
 
 License
 =========

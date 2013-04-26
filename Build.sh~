@@ -32,7 +32,6 @@ read -p "Press [Enter] to build the DEBIAN file."
   #Prepare the build
   cp ./README.md ./DEBIAN/usr/share/doc/preprocess/README
   cp ./langdefines ./DEBIAN/etc/preprocess/langdefines
-  cp ./preprocess ./DEBIAN/usr/bin/preprocess
   rm *.deb
 
   #Attempt the build

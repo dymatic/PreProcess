@@ -1,2 +1,4 @@
 #!/bin/bash
 ldconfig
+mkdir $HOME/.preprocess
+echo "/etc/preprocess/langdefines" > $HOME/.preprocess/config

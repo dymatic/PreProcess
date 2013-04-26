@@ -5,10 +5,8 @@ module ProjectSpecific(
   where
 
 import LibHaskell.LibLists
-import LibHaskell.LibStrings
 
-
---say|tell_cout
+--Can handle say_cout \n yell_cout or say|tell_cout
 makeParameters :: String -> [(String,String)]
 makeParameters x = sew (splitOn modX '|') $ churn y num
   where num  = (length (splitOn x '|'))
@@ -19,6 +17,7 @@ makeAllParameters :: [String] -> [(String,String)]
 makeAllParameters [] = []
 makeAllParameters (x:xs) = makeParameters x ++ makeAllParameters xs
 
+--Removes strings between $'s, saves $'s in lines with an @ symbol.
 sanitize :: [String] -> [String]
 sanitize [] = []
 sanitize (x:xs)
