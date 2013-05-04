@@ -5,6 +5,7 @@ module Replace(
  ,replList) where
 
 import LibHaskell.LibLists
+
 replace :: (Eq a) => [a] -> [(a,a)] -> [a]
 replace [] _ = []
 replace (x:xs) ys
@@ -12,8 +13,8 @@ replace (x:xs) ys
 	| otherwise = x : rest
 	where rest = replace xs ys
 
-replaceAll :: (Eq a) => [[a]] -> [(a,a)] -> [[a]]
-replaceAll fs ys = map ((flip replace) ys) fs
+replaceAll' :: (Eq a) => [[a]] -> [(a,a)] -> [[a]]
+replaceAll' fs ys = map ((flip replace) ys) fs
 
 replaceList :: (Eq a) => [a] -> ([a],[a]) -> [a]
 replaceList [] _ = []
