@@ -1,0 +1,12 @@
+module test(
+        replaceAll
+       ,replaceEverything) where
+import Archimedes.Tasking.Replace
+
+replaceAll :: String -> [(String,String)] -> [String]
+replaceAll _ [] = []
+replaceAll str ((a,b):xs) = replaceAll (replaceList str (a,b)) xs
+
+replaceEverything :: [String] -> [(String,String)] -> [String]
+replaceEverything [] _ = []
+replaceEverything (x:xs) y = replaceAll x y ++ replaceEverything xs y
